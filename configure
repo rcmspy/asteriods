@@ -1,0 +1,17 @@
+#!/bin/bash
+PYTHON_EXEC=.venv/bin/python
+PIP_EXEC=.venv/bin/pip
+
+echo "Creating virtual environment"
+python -m venv .venv
+
+echo "Installing Pip Tools"
+$PIP_EXEC install pip-tools
+
+echo "Compiling and installing dependencies"
+$PYTHON_EXEC -m piptools compile pyproject.toml -o requirements.txt
+$PIP_EXEC install -r requirements.txt
+
+echo "Cleaning Up"
+rm requirements.txt
+
